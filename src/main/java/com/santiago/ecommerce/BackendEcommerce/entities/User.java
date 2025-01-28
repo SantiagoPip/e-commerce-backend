@@ -1,9 +1,6 @@
 package com.santiago.ecommerce.BackendEcommerce.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
@@ -12,13 +9,19 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    @OneToOne
+    private Cart cart;
     private String email;
-    public User() {}
+    public User() {
+        this.cart = new Cart();
+
+    }
     public User(Long id, String username, String password, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.cart = new Cart();
     }
 
     public Long getId() {

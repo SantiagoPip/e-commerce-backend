@@ -1,9 +1,6 @@
 package com.santiago.ecommerce.BackendEcommerce.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Product {
@@ -16,6 +13,7 @@ public class Product {
     private int quantityAvailable;
     private String category;
     private boolean available;
+
 
     public Product(Long id, String name, String description, double price, int quantityAvailable, String category, boolean available) {
         this.id = id;
