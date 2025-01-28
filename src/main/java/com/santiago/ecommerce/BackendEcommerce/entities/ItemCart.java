@@ -19,6 +19,12 @@ public class ItemCart {
 
     }
     public ItemCart(Product product, int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero.");
+        }
+        if (!product.isAvailable()) {
+            throw new IllegalArgumentException("Product is not available.");
+        }
         this.product = product;
         this.quantity = quantity;
         this.totalPrice = product.getPrice() * quantity;
