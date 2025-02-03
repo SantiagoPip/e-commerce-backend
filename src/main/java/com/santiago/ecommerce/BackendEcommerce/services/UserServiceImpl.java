@@ -1,6 +1,8 @@
 package com.santiago.ecommerce.BackendEcommerce.services;
 
+import com.santiago.ecommerce.BackendEcommerce.entities.Cart;
 import com.santiago.ecommerce.BackendEcommerce.entities.User;
+import com.santiago.ecommerce.BackendEcommerce.repositories.CartRepository;
 import com.santiago.ecommerce.BackendEcommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import java.util.Optional;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CartRepository cartRepository;
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -44,6 +48,18 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User createUser(User user) {
-        return null;
+        // Guarda el usuario inicialmente
+        User userSaved = userRepository.save(user);
+
+        // Crea y guarda el carrito asociado
+        Cart cartUser = new Cart();
+        cartUser.setUser(userSaved);
+        Cart cartSaved = cartRepository.save(cartUser);
+
+        // Asigna el carrito al usuario guardado
+        userSaved.setCart(cartSaved);
+
+        // Guarda el usuario nuevamente con el carrito asignado
+        return userRepository.save(userSaved);
     }
 }

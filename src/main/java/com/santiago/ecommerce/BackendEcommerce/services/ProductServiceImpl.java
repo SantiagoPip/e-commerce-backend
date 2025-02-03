@@ -1,6 +1,8 @@
 package com.santiago.ecommerce.BackendEcommerce.services;
 
 import com.santiago.ecommerce.BackendEcommerce.entities.Product;
+import com.santiago.ecommerce.BackendEcommerce.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,9 +10,11 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements IProductService {
 
+    @Autowired
+    private ProductRepository productRepository;
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        return productRepository.findAll();
     }
 
     @Override
@@ -20,6 +24,10 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Optional<Product> deleteProductById(Long id) {
+
+        //Optional<Product> product = productRepository.findById();
+
+
         return Optional.empty();
     }
 
@@ -30,6 +38,6 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product createProduct(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 }

@@ -1,5 +1,6 @@
 package com.santiago.ecommerce.BackendEcommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Cart {
     private Long id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemCart>items;
+    @JsonIgnore
     @OneToOne
     private User user;
     public Cart() {
@@ -53,5 +55,13 @@ public class Cart {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", items=" + items +
+                '}';
     }
 }

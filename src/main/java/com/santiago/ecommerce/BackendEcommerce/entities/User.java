@@ -13,7 +13,7 @@ public class User {
     private Cart cart;
     private String email;
     public User() {
-        this.cart = new Cart();
+
 
     }
     public User(Long id, String username, String password, String email) {
@@ -21,7 +21,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.cart = new Cart();
     }
 
     public Long getId() {
@@ -48,6 +47,14 @@ public class User {
         this.password = password;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -64,5 +71,9 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public void addItems(ItemCart itemCart){
+        this.cart.addItem(itemCart);
     }
 }
